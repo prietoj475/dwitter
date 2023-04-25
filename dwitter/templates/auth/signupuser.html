@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero is-fullheight">
+    <div class="hero-body is-justify-content-center is-align-items-center">
+        <div class="columns is-flex is-flex-direction-column box">
+            {% if error %}
+                <div class="message is-danger" role="alert">
+                    <div class="message-body">
+                        {{ error }}
+                    </div>
+                </div>
+            {% endif %}
+            <form id="SignUpform" method="POST" action="{% url 'signupuser' %}">
+                {% csrf_token %}
+                <!-- username -->
+                <div class="column">
+                    <label class="label">Username</label>
+                    <input class="input" name="username" type="text" placeholder="jsmith1">
+                    <!-- <p class="help is-success">This username is available</p> -->
+                </div>
+
+                <!-- email -->
+                <div class="column">
+                    <label class="label">Email</label>
+                    <input class="input" name="email" type="email" placeholder="e.g. johnsmith@gmail.com">
+                </div>
+
+                <!-- Passwords -->
+                <div class="column">
+                    <label class="label">Password</label>
+                    <input class="input" name="password1" type="password" placeholder="be creative">
+                </div>
+                <div class="column">
+                    <label class="label">Comfirm Password</label>
+                    <input class="input" name="password2" type="password" placeholder="dont forget">
+                </div>
+                <button class="button is-primary is-fullwidth" type="submit">Create Account</button>
+        </form>
+    </div>
+</div>
+  {% endblock content %}

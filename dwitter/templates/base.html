@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include the Bulma CSS framework for styling -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- <title>Dwitter</title> -->
+</head>
+<body>
+    <section class="hero is-primary is-small mb-4">
+        <div class="hero-head">
+            <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'dwitter:dashboard' %}">
+                            <h1 class="title is-1">Dwitter</h1>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'dwitter:home' %}">
+                            <h1 class="title is-1">Dwitter</h1>
+                        </a>
+                    {% endif %}
+                <span class="navbar-burger" data-target="navbarMenuHeroA">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                </div>
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                <div class="navbar-end">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'dwitter:dashboard' %}" class="navbar-item ">Dashboard</a>
+                        <form id="SignOutform" style='display: none;' method="POST" action="{% url 'logoutuser' %}">
+                            {% csrf_token %} 
+                        </form>
+                        <span class="navbar-item">
+                            <button type="submit" form="SignOutform" class="button is-primary is-1"><strong>Sign Out</strong></button>
+                        </span>
+                    {% else %}
+                        
+                        <a href="{% url 'signupuser' %}" class="navbar-item">
+                        <strong>Sign up</strong>
+                        </a>
+                        <a class="navbar-item" href="{% url 'loginuser' %}">
+                            Login
+                        </a>
+                    {% endif %}
+                    </span>
+                </div>
+                </div>
+            </div>
+            </nav>
+        </div>
+        
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <p class="title">
+                    Welcome to Dwitter
+                </p>
+                <p class="subtitle">
+                    Your tiny social network built with Django
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="columns-center">
+            {% block content %}
+
+            {% endblock content %}  
+        </div>
+    </div>   
+</body>
+</html>
