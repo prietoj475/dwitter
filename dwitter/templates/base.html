@@ -5,11 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Include the Bulma CSS framework for styling -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <!-- <title>Dwitter</title> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #6a11cb;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #01D1B2, #0188D1, #01D14A);
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #01D1B2, #0188D1, #01D14A)
+    }
+    </style>
 </head>
-<body>
+<body class="gradient-custom" style="height: 100vh;">
     <section class="hero is-primary is-small mb-4">
         <div class="hero-head">
             <nav class="navbar">
@@ -56,16 +66,18 @@
             </nav>
         </div>
         
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <p class="title">
-                    Welcome to Dwitter
-                </p>
-                <p class="subtitle">
-                    Your tiny social network built with Django
-                </p>
+        {% if not user.is_authenticated %}
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <p class="title">
+                        Welcome to Dwitter
+                    </p>
+                    <p class="subtitle">
+                        Your tiny social network built with Django
+                    </p>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </section>
 
     <div class="container">

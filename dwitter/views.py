@@ -17,6 +17,8 @@ def home(request):
     return render(request, 'auth/loginuser.html')
 
 def signupuser(request):
+    if request.user.is_authenticated:
+        return redirect('dwitter:dashboard')
     if request.method == 'GET':
         return render(request, 'auth/signupuser.html', {'form':UserCreationForm()})
     else:
@@ -33,6 +35,8 @@ def signupuser(request):
             return render(request, 'auth/signupuser', {'form':UserCreationForm, 'error': 'Password did not match'})
 
 def loginuser(request):
+    if request.user.is_authenticated:
+        return redirect('dwitter:dashboard')
     if request.method == 'GET':
         return render(request, 'auth/loginuser.html', {'form':AuthenticationForm})
     else:
